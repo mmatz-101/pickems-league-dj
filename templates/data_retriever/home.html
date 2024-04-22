@@ -1,0 +1,64 @@
+{% extends "_base.html" %} {% block title %}Data Homepage{% endblock title %} 
+{%block content %}
+
+<div class="flex">
+  <h1 class="text-3xl">Data Homepage</h1>
+</div>
+
+<div class="flex justify-center">
+  <form action="gather-data/" method="post">
+    {% csrf_token %}
+    {{ form }}
+
+    <input type="text"  name="league"/>
+    <input type="number"  name="year"/>
+    <input type="number" name="week"/>
+    <input type="submit" value="Submit"/>
+  </form>
+</div>
+{% endblock content %}
+{% comment %} <form class="form-control" method="post" action="gather-data/">
+    <label class="label">Select a League</label>
+    <div class="form-control">
+      <label class="label cursor-pointer">
+        <span class="label-text">NFL</span>
+        <input
+          type="radio"
+          name="radio-10"
+          class="radio checked:bg-primary"
+          checked
+        />
+      </label>
+    </div>
+    <div class="form-control">
+      <label class="label cursor-pointer">
+        <span class="label-text">NCAA</span>
+        <input
+          type="radio"
+          name="radio-10"
+          class="radio checked:bg-primary"
+          checked
+        />
+      </label>
+    </div>
+    <div class="divider"></div>
+    <div class="form-control">
+      <label class="label">Input a Year</label>
+      <input
+        type="number"
+        id="year"
+        class="input input-bordered w-full max-w-xs"
+      />
+    </div>
+    <div class="divider"></div>
+    <div class="form-control">
+      <label class="label">Input a Week</label>
+      <input
+        type="number"
+        id="year"
+        class="input input-bordered w-full max-w-xs"
+      />
+    </div>
+    <div class="divider"></div>
+    <button class="btn btn-success">Submit</button>
+</form> {% endcomment %}
