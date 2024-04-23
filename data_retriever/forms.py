@@ -7,5 +7,5 @@ class DataRetrieverForm(forms.Form):
     ]
     league = forms.CharField()
     year = forms.IntegerField(max_value=2030, min_value=2020)
-    week = forms.IntegerField()
+    week_query = forms.IntegerField()
 
