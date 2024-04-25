@@ -6,7 +6,6 @@ from pytz import timezone
 import requests
 import datetime
 
-
 from .forms import DataRetrieverForm
 from .models import Game
 
@@ -20,23 +19,39 @@ def data_request(request):
     form = DataRetrieverForm(request.POST)
     if form.is_valid():
         form_data = form.cleaned_data
-        json_data = get_json_data(form_data.get("league"), form_data.get("year"), form_data.get("week_query"))
+        data = get_data(
+            form_data.get("league"),
+            form_data.get("year"),
+            form_data.get("week_query"),
+            form_data.get("week"),
+        )
+        if data == {}:
+            return HttpResponse("error")
+        save_game_data(data)
         return HttpResponse("Success")
-    
+
     return request
 
 
-def get_json_data(league, year, week_query):
-    url = f"https://www.oddsshark.com/api/scores/football/{league.lower()}/{year}/{week_query}?_format=json"
+def get_data(league, year, week_query, week) -> list[Game]:
+    if league == "ncaa":
+        url = f"https://www.oddsshark.com/api/scores/football/ncaaf/{year}/{week_query}?_format=json"
+    else:
+        url = f"https://www.oddsshark.com/api/scores/football/{league.lower()}/{year}/{week_query}?_format=json"
     response = requests.get(url)
 
     if response.status_code != 200:
         return {}
-    
-    data = clean_json_data(response.json()["scores"])
-    return 
 
-def clean_json_data(data: dict):
+    data = clean_json_data(response.json()["scores"], week, league)
+    return data
+
+
+def clean_json_data(data: dict, week, league) -> list[Game]:
+    """
+    Parse the raw json data from the betting website. Returning a list of Game models.
+    """
+    game_list = []
     for game_id_str in data:
         game_id = data[game_id_str]["id"]
         schedule_date = data[game_id_str]["date"]
@@ -60,6 +75,8 @@ def clean_json_data(data: dict):
             schedule_date=eastern_datetime,
             status=status,
             tv_station=tv_station,
+            week=week,
+            league=league,
             home_team_name=home_team_name,
             home_team_spread=home_team_spread,
             home_team_score=home_team_score,
@@ -70,4 +87,11 @@ def clean_json_data(data: dict):
             away_team_record=away_team_record,
         )
 
+        game_list.append(game)
+
+    return game_list
+
+
+def save_game_data(data: list[Game]) -> None:
+    for game in data:
         game.save()

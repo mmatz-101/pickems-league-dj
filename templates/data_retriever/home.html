@@ -5,63 +5,20 @@
   <h1 class="text-3xl">Data Homepage</h1>
 </div>
 
-<div class="flex flex-grow justify-center max-w-sm">
-  <form class="form-control" action="gather-data/" method="post">
-    {% csrf_token %}
-    {{ form }}
+<div class="flex justify-center">
+    <form class="form-control" action="gather-data/" method="post">
+      {% csrf_token %}
+      {{ form }}
 
-      <label for="league" class="lable">What League?</label>
-      <input class="input input-bordered w-full max-w-sm" type="text"  name="league"/>
-      <label for="year" class="label">Enter the Year</label>
-      <input class="input input-bordered w-full max-w-sm" type="number"  name="year"/>
-      <label for="week_query" class="label">What is the query week?</label>
-      <input class="input input-bordered w-full max-w-sm" type="number" name="week_query"/>
-      <input class="btn btn-success mt-4" type="submit" value="Submit"/>
-  </form>
+        <label for="league" class="lable">What League?</label>
+        <input class="input input-bordered w-full max-w-sm" type="text"  name="league"/>
+        <label for="year" class="label">Enter the Year</label>
+        <input class="input input-bordered w-full max-w-sm" type="number"  name="year"/>
+        <label for="week_query" class="label">What is the query week?</label>
+        <input class="input input-bordered w-full max-w-sm" type="number" name="week_query"/>
+        <label for="week" class="label">What is current week?</label>
+        <input class="input input-bordered w-full max-w-sm" type="number" name="week"/>
+        <input class="btn btn-success mt-4" type="submit" value="Submit"/>
+    </form>
 </div>
 {% endblock content %}
-{% comment %} <form class="form-control" method="post" action="gather-data/">
-    <label class="label">Select a League</label>
-    <div class="form-control">
-      <label class="label cursor-pointer">
-        <span class="label-text">NFL</span>
-        <input
-          type="radio"
-          name="radio-10"
-          class="radio checked:bg-primary"
-          checked
-        />
-      </label>
-    </div>
-    <div class="form-control">
-      <label class="label cursor-pointer">
-        <span class="label-text">NCAA</span>
-        <input
-          type="radio"
-          name="radio-10"
-          class="radio checked:bg-primary"
-          checked
-        />
-      </label>
-    </div>
-    <div class="divider"></div>
-    <div class="form-control">
-      <label class="label">Input a Year</label>
-      <input
-        type="number"
-        id="year"
-        class="input input-bordered w-full max-w-xs"
-      />
-    </div>
-    <div class="divider"></div>
-    <div class="form-control">
-      <label class="label">Input a Week</label>
-      <input
-        type="number"
-        id="year"
-        class="input input-bordered w-full max-w-xs"
-      />
-    </div>
-    <div class="divider"></div>
-    <button class="btn btn-success">Submit</button>
-</form> {% endcomment %}

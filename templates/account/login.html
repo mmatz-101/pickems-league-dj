@@ -4,7 +4,7 @@
 {% block title %}Log in{% endblock %}
 
 {% block content %}
-<h2>Log in</h2>
+<h2 class="prose-h2:">Log in</h2>
 <form method="post">
   {% csrf_token %}
   {{ form|crispy }}

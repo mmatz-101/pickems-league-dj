@@ -1,4 +1,6 @@
 from django.db import models
+from .constants import LEAGUE_CHOICES
+
 
 class Game(models.Model):
     """
@@ -9,6 +11,8 @@ class Game(models.Model):
     schedule_date = models.DateTimeField(null=False)
     status = models.CharField(max_length=200)
     tv_station = models.CharField(max_length=200)
+    week = models.IntegerField()
+    league = models.CharField(choices=LEAGUE_CHOICES)
     home_team_name = models.CharField(max_length=200)
     home_team_spread = models.FloatField()
     home_team_score = models.IntegerField()
@@ -17,3 +21,6 @@ class Game(models.Model):
     away_team_spread = models.FloatField()
     away_team_score = models.IntegerField()
     away_team_record = models.CharField(max_length=200)
+
+    def __str__(self) -> str:
+        return f"{self.home_team_name} v. {self.away_team_name}"
