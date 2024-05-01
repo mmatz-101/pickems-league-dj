@@ -2,5 +2,24 @@
 
 {% block content %}
 <h1>Landing Page for {{ user.username }}</h1>
-
+<table class="table table-bordered table-striped pt-20">
+  <thead>
+    <tr>
+      <th scope="col">Column 1</th>
+      <th scope="col">Column 2</th>
+      <th scope="col" class="d-none d-md-table-cell">Column 3</th>
+      <th scope="col" class="d-none d-md-table-cell">Column 4</th>
+      <th scope="col" class="d-none d-lg-table-cell">Column 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Data 1</td>
+      <td>Data 2</td>
+      <td>Data 3</td>
+      <td>Data 4</td>
+      <td>Data 5</td>
+    </tr>
+    </tbody>
+</table>
 {% endblock content %}
