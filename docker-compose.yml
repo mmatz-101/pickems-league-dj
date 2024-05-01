@@ -10,27 +10,10 @@ services:
       - db
   db:
     image: postgres:16
-    ports:
-      - 5432:5432
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=database1
-      - POSTGRES_DB=pickems-league-db
-
-  pg_admin:
-    image: dpage/pgadmin4:8.5
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@email.com
-      - PGADMIN_DEFAULT_PASSWORD=adminpassword
-      - PGADMIN_LISTEN_PORT=8001
-    ports:
-      - 8001:8001
-    depends_on:
-      - db
-
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
 
 volumes:
   postgres_data:

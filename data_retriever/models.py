@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 from .constants import LEAGUE_CHOICES
 
 
@@ -12,7 +14,7 @@ class Game(models.Model):
     status = models.CharField(max_length=200)
     tv_station = models.CharField(max_length=200)
     week = models.IntegerField()
-    league = models.CharField(choices=LEAGUE_CHOICES)
+    league = models.CharField(choices=LEAGUE_CHOICES, max_length=10)
     home_team_name = models.CharField(max_length=200)
     home_team_spread = models.FloatField()
     home_team_score = models.IntegerField()
@@ -24,3 +26,6 @@ class Game(models.Model):
 
     def __str__(self) -> str:
         return f"{self.home_team_name} v. {self.away_team_name}"
+
+    def get_absolute_url(self):
+        return reverse("model_detail", kwargs={"pk": self.pk})
