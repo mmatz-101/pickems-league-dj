@@ -30,7 +30,7 @@ def data_request(request):
         save_game_data(data)
         return HttpResponse("Success")
 
-    return request
+    return HttpResponse("Unable to parse form data.")
 
 
 def get_data(league, year, week_query, week) -> list[Game]:
@@ -66,6 +66,7 @@ def clean_json_data(data: dict, week, league) -> list[Game]:
         away_team_score = data[game_id_str]["teams"]["away"]["score"]
         away_team_record = data[game_id_str]["teams"]["away"]["record"]
 
+        # TODO: fix timezone
         # convert schedule_date
         schedule_date = datetime.datetime.fromtimestamp(schedule_date)
         eastern_datetime = timezone("US/Eastern").localize(schedule_date)

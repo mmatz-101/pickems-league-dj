@@ -1,4 +1,27 @@
 {% extends "_base.html" %}
 {% block content %}
 <h1>Landing Page for data page</h1>
+
+<form class="row" method="post" action="gather-data/">
+{% csrf_token %}
+  <div class="col-md-6 mb-3">
+    <label for="league" class="form-label">League:</label>
+    <input type="text" class="form-control" id="league" name="league" placeholder="Enter League Name">
+  </div>
+  <div class="col-md-6 mb-3">
+    <label for="year" class="form-label">Year:</label>
+    <input type="number" class="form-control" id="year" name="year" placeholder="YYYY">
+  </div>
+  <div class="col-md-6 mb-3">
+    <label for="week_query" class="form-label">Week Query:</label>
+    <input type="number" class="form-control" id="week_query" name="week_query" min="1" max="52">
+  </div>
+  <div class="col-md-6 mb-3">
+    <label for="week" class="form-label">Week:</label>
+    <input type="number" class="form-control" id="week" name="week" min="1" max="52">
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
 {% endblock content %}
