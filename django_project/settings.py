@@ -185,7 +185,7 @@ SITE_ID = 1
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
 # TODO: figure out how to redirect a logged in user to /UUID
-LOGIN_REDIRECT_URL = ""
+LOGIN_REDIRECT_URL = "/accounts/redirect-login"
 
 # https://django-allauth.readthedocs.io/en/latest/views.html#logout-account-logout
 ACCOUNT_LOGOUT_REDIRECT_URL = "home"

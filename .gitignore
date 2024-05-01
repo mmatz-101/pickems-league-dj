@@ -13,3 +13,6 @@ media
 
 # Virtual environment
 .venv
+
+# Static file collection for runserver
+staticfiles/
